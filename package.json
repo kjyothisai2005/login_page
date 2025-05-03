@@ -1,0 +1,23 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "login.spec.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjyothisai2005/login_page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kjyothisai2005/login_page/issues"
+  },
+  "homepage": "https://github.com/kjyothisai2005/login_page#readme",
+  "devDependencies": {
+    "jasmine": "^5.7.1"
+  }
+}

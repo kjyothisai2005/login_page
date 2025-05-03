@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Signup Form Test</title>
+  <title>Login</title>
 </head>
 <body>
-
-  <h2>Signup Form Test</h2>
-
-  <form id="signupForm">
-    <label for="email">Email:</label><br />
-    <input type="email" id="email" name="email" required><br /><br />
-
-    <label for="password">Password:</label><br />
-    <input type="password" id="password" name="password" required><br /><br />
-
-    <label for="repassword">Re-enter Password:</label><br />
-    <input type="password" id="repassword" name="repassword" required><br /><br />
-
-    <input type="submit" value="Sign Up">
+  <h2>Login Form</h2>
+  <form id="loginForm">
+    <label>Username:</label>
+    <input type="text" id="username"><br><br>
+    <label>Password:</label>
+    <input type="password" id="password"><br><br>
+    <button type="submit">Login</button>
   </form>
-<br><br>
-  <div id="testResults"></div> <!-- This will display the test results -->
 
-  <script src="signup.js"></script> <!-- Link to signup.js -->
-  <script src="test.js"></script>   <!-- Link to test.js -->
+  <p id="result"></p>
 
+  <script src="signup.js"></script>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit",async function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const success =await authenticate(username, password);
+      alert(success ? "Login successful!" : "Login failed.");
+    });
+  </script>
 </body>
 </html>
+

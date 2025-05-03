@@ -1,34 +1,32 @@
-// signup.js
-document.addEventListener("DOMContentLoaded", function () {
-    const validEmails = [
-      "user@example.com",
-      "admin@example.com",
-      "test@example.org"
-    ];
-  
-    const form = document.getElementById("signupForm");
-  
-    form.addEventListener("submit", function (event) {
-      event.preventDefault(); // Stop actual submission
-  
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const repassword = document.getElementById("repassword").value;
-  
-      // First, check if passwords match
-      if (password !== repassword) {
-        alert("Passwords do not match!");
-        return;
+async function authenticate(username, password) {
+  try {
+    const response = await fetch('data.txt');
+    
+    // Check if the file was fetched successfully
+    if (!response.ok) {
+      console.error("Failed to fetch data.txt");
+      return false;
+    }
+
+    const text = await response.text();
+
+    // Remove empty lines and extra spaces
+    const users = text.split('\n').map(line => line.trim()).filter(line => line);
+
+    for (const user of users) {
+      const [userFromFile, passFromFile] = user.split(',');
+
+      // Safety check: skip invalid lines
+      if (!userFromFile || !passFromFile) continue;
+
+      if (userFromFile === username && passFromFile === password) {
+        return true;
       }
-  
-      // Then, check if email is in the allowed list
-      if (!validEmails.includes(email)) {
-        alert("Email not recognized.");
-        return;
-      }
-  
-      // All validations passed
-      alert("Successfully signed up!");
-    });
-  });
-  
+    }
+
+    return false; // No match found
+  } catch (err) {
+    console.error("Error reading user data:", err);
+    return false;
+  }
+}
